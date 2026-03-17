@@ -57,7 +57,8 @@
 <line x1='361.58' y1='322.88' x2='361.58' y2='62.18' style='stroke-width: 1.60; stroke: #DC2626; stroke-opacity: 0.75; stroke-dasharray: 8.54,8.54; stroke-linecap: butt;' />
 <line x1='534.80' y1='322.88' x2='534.80' y2='62.18' style='stroke-width: 1.60; stroke: #DC2626; stroke-opacity: 0.75; stroke-dasharray: 8.54,8.54; stroke-linecap: butt;' />
 <line x1='604.08' y1='322.88' x2='604.08' y2='62.18' style='stroke-width: 1.60; stroke: #DC2626; stroke-opacity: 0.75; stroke-dasharray: 8.54,8.54; stroke-linecap: butt;' />
-<polyline points='84.44,149.20 101.76,170.90 119.08,210.24 136.40,214.16 205.69,74.03 223.01,213.24 240.33,201.96 257.65,202.81 274.98,193.89 292.30,232.30 309.62,220.87 326.94,217.30 344.26,208.95 361.58,209.38 378.90,198.17 396.23,199.03 413.55,188.75 430.87,189.89 448.19,229.87 465.51,179.97 482.83,230.51 500.16,229.87 517.48,217.02 534.80,104.09 552.12,139.06 569.44,246.29 586.76,96.16 604.08,311.03 ' style='stroke-width: 1.92; stroke: #7C3AED; stroke-linecap: butt;' />
+<polyline points='84.44,149.20 101.76,170.90 119.08,210.24 136.40,214.16 ' style='stroke-width: 1.92; stroke: #7C3AED; stroke-linecap: butt;' />
+<polyline points='205.69,74.03 223.01,213.24 240.33,201.96 257.65,202.81 274.98,193.89 292.30,232.30 309.62,220.87 326.94,217.30 344.26,208.95 361.58,209.38 378.90,198.17 396.23,199.03 413.55,188.75 430.87,189.89 448.19,229.87 465.51,179.97 482.83,230.51 500.16,229.87 517.48,217.02 534.80,104.09 552.12,139.06 569.44,246.29 586.76,96.16 604.08,311.03 ' style='stroke-width: 1.92; stroke: #7C3AED; stroke-linecap: butt;' />
 <circle cx='84.44' cy='149.20' r='2.70' style='stroke-width: 0.71; stroke: #7C3AED; fill: #7C3AED;' />
 <circle cx='101.76' cy='170.90' r='2.70' style='stroke-width: 0.71; stroke: #7C3AED; fill: #7C3AED;' />
 <circle cx='119.08' cy='210.24' r='2.70' style='stroke-width: 0.71; stroke: #7C3AED; fill: #7C3AED;' />
@@ -109,9 +110,9 @@
 <text x='604.08' y='335.60' text-anchor='middle' style='font-size: 10.00px;fill: #4D4D4D; font-family: "Arimo";' textLength='22.25px' lengthAdjust='spacingAndGlyphs'>2026</text>
 <text transform='translate(21.52,192.53) rotate(-90)' text-anchor='middle' style='font-size: 11.00px;fill: #595959; font-family: "Arimo";' textLength='116.25px' lengthAdjust='spacingAndGlyphs'>Adjustment (thousands)</text>
 <text x='58.46' y='38.05' style='font-size: 11.00px;fill: #666666; font-family: "Arimo";' textLength='325.59px' lengthAdjust='spacingAndGlyphs'>Annual benchmark adjustment, 1996–2026 (thousands of persons)</text>
-<text x='58.46' y='49.93' style='font-size: 11.00px;fill: #666666; font-family: "Arimo";' textLength='360.16px' lengthAdjust='spacingAndGlyphs'>Note: 1999 and 2003–2011 values reflect persons aged 20 and older only.</text>
+<text x='58.46' y='49.93' style='font-size: 11.00px;fill: #666666; font-family: "Arimo";' textLength='494.42px' lengthAdjust='spacingAndGlyphs'>Note: 1999 and 2003–2011 values reflect persons aged 20 and older instead of persons 16 and older.</text>
 <text x='58.46' y='23.58' style='font-size: 14.00px; font-weight: bold; font-family: "Arimo";' textLength='291.86px' lengthAdjust='spacingAndGlyphs'>CPS Population Control Adjustment — Male</text>
-<text x='58.46' y='353.49' style='font-size: 8.50px;fill: #7F7F7F; font-family: "Arimo";' textLength='396.31px' lengthAdjust='spacingAndGlyphs'>Red dashed lines mark years the CPS adopted a new Census population base (2003, 2012, 2022, 2026).</text>
+<text x='58.46' y='353.49' style='font-size: 8.50px;fill: #7F7F7F; font-family: "Arimo";' textLength='298.39px' lengthAdjust='spacingAndGlyphs'>Red dashed lines mark years the CPS adopted a new Census population base.</text>
 <text x='58.46' y='362.67' style='font-size: 8.50px;fill: #7F7F7F; font-family: "Arimo";' textLength='360.08px' lengthAdjust='spacingAndGlyphs'>Source: BLS CPS Technical Documentation — https://www.bls.gov/cps/documentation.htm#pop</text>
 </g>
 </g>

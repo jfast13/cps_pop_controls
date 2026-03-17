@@ -43,6 +43,21 @@
     .about a { color: #2563eb; text-decoration: none; }
     .about a:hover { text-decoration: underline; }
 
+    .download-btn {
+      display: inline-block;
+      margin-bottom: 1.75rem;
+      padding: 0.4rem 1rem;
+      background: #fff;
+      border: 2px solid #16a34a;
+      color: #16a34a;
+      border-radius: 5px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.1s, color 0.1s;
+    }
+    .download-btn:hover { background: #f0fdf4; }
+
     /* ── Toggle controls ─────────────────────────────────────────────────── */
     .controls {
       display: flex;
@@ -115,6 +130,8 @@
     <strong style="color:#dc2626;">Red dashed lines</strong> mark years when the CPS adopted a new
     Census-based population estimate series.
   </div>
+
+  <a class="download-btn" href="data/popcontrols_cps1996_2026_clean.csv" download="popcontrols_cps1996_2026.csv">&#8659; Download data (CSV)</a>
 
   <div class="controls">
     <div class="control-row">

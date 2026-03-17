@@ -16,6 +16,10 @@ estimate series: **2003, 2012, 2022, and 2026**.
 > **Note on sex breakdowns:** The Male and Female figures for 1999 and 2003–2011 reflect
 > persons aged 20 and older only, all other years reflect persons aged 16 and older.
 
+## Download
+
+[⬇ Download data (CSV)](data/popcontrols_cps1996_2026_clean.csv)
+
 ## Example: Total adjustment
 
 ![Total CPS Population Control Adjustment](plots/total.png)

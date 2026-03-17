@@ -23,6 +23,16 @@ df <- read_csv(
   )
 )
 
+# ── Export clean CSV (no notes column) ───────────────────────────────────────
+df |>
+  select(year, total, white, black, hispanic, male, female,
+         census_base_change = change_census) |>
+  write_csv("data/popcontrols_cps1996_2026_clean.csv")
+message("Exported: data/popcontrols_cps1996_2026_clean.csv")
+
+# Add NA rows for 2000–2002 so geom_line breaks instead of bridging the gap
+df <- bind_rows(df, tibble(year = 2000:2002)) |> arrange(year)
+
 # ── Constants ─────────────────────────────────────────────────────────────────
 CENSUS_YEARS <- c(2003, 2012, 2022, 2026)
 
