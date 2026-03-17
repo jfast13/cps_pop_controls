@@ -1,8 +1,5 @@
 # CPS Population Control Adjustments
 
-Historical data of annual population control adjustments applied to the
-[Current Population Survey (CPS)](https://www.bls.gov/cps/), 1996–2026.
-
 ## About the data
 
 Each year the BLS applies a population control adjustment to the CPS to keep survey-based population
