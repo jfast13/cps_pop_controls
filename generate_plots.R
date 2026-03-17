@@ -27,12 +27,11 @@ df <- read_csv(
 CENSUS_YEARS <- c(2003, 2012, 2022, 2026)
 
 CAPTION <- paste0(
-  "Red dashed lines mark years the CPS adopted a new Census population base (",
-  paste(CENSUS_YEARS, collapse = ", "), ").\n",
+  "Red dashed lines mark years the CPS adopted a new Census population base.\n",
   "Source: BLS CPS Technical Documentation \u2014 https://www.bls.gov/cps/documentation.htm#pop"
 )
 
-SEX_NOTE <- "\nNote: 1999 and 2003\u20132011 values reflect persons aged 20 and older only."
+SEX_NOTE <- "\nNote: 1999 and 2003\u20132011 values reflect persons aged 20 and older instead of persons 16 and older."
 
 dir.create("plots", showWarnings = FALSE)
 
