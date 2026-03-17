@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CPS Population Control Adjustments (1996–2026)</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 3rem;
+      color: #1a1a1a;
+      background: #f8f9fa;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      color: #555;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .about {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #2563eb;
+      border-radius: 0 6px 6px 0;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 1.75rem;
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: #334155;
+    }
+
+    .about a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+    .about a:hover { text-decoration: underline; }
+
+    .census-key {
+      display: inline-block;
+      width: 22px;
+      border-top: 2px dashed #dc2626;
+      vertical-align: middle;
+      margin: 0 3px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .controls button {
+      padding: 0.375rem 1.1rem;
+      border: 2px solid #2563eb;
+      background: #fff;
+      color: #2563eb;
+      border-radius: 5px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.1s, color 0.1s;
+    }
+
+    .controls button.active {
+      background: #2563eb;
+      color: #fff;
+    }
+
+    .controls button:hover:not(.active) {
+      background: #eff6ff;
+    }
+
+    .chart-wrapper {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1.25rem 1rem 1rem;
+    }
+
+    .chart-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 0.75rem;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 420px;
+    }
+
+    .chart-note {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      margin-top: 0.75rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>CPS Population Control Adjustments</h1>
+  <p class="subtitle">Current Population Survey &mdash; annual benchmark adjustments, 1996&ndash;2026</p>
+
+  <div class="about">
+    <strong>About the data:</strong> Each year the BLS applies a population control adjustment to the CPS to align survey
+    estimates with updated Census Bureau population benchmarks. The values shown are the size of that annual adjustment
+    (in thousands of persons). Data was manually collected from the
+    <a href="https://www.bls.gov/cps/documentation.htm#pop" target="_blank" rel="noopener noreferrer">BLS CPS Technical Documentation page</a>.
+    No adjustments were published for 2000&ndash;2002.
+    <span class="census-key"></span> Red dashed lines mark years when the CPS adopted a new
+    Census-based population estimate series (2003, 2012, 2022, 2026).
+    Sex breakdowns for 1999 and 2003&ndash;2011 reflect persons aged 20 and older only.
+  </div>
+
+  <div class="controls">
+    <button id="btn-total"  class="active" onclick="setView('total')">Total</button>
+    <button id="btn-race"   onclick="setView('race')">By Race / Ethnicity</button>
+    <button id="btn-gender" onclick="setView('gender')">By Sex</button>
+  </div>
+
+  <div class="chart-wrapper">
+    <div class="chart-title" id="chartTitle">Total Population Adjustment</div>
+    <div class="chart-container">
+      <canvas id="myChart"></canvas>
+    </div>
+    <p class="chart-note">
+      Values in thousands of persons. Gap at 2000&ndash;2002 = no published data.
+    </p>
+  </div>
+
+  <script>
+    // ── Data ────────────────────────────────────────────────────────────────
+    // All years 1996–2026; null = no data published (2000–2002)
+    const YEARS = [
+      '1996','1997','1998','1999',
+      '2000','2001','2002',
+      '2003','2004','2005','2006','2007','2008','2009','2010','2011','2012',
+      '2013','2014','2015','2016','2017','2018','2019','2020','2021','2022',
+      '2023','2024','2025','2026'
+    ];
+
+    const S = {
+      total:   [1115,  468,  -299,  307,  null,null,null,  3540, -560,   -8,  -67,  321, -745, -483, -258, -347, 1510,   138,    2,  528,  265, -831,  488, -800, -811, -476,  973,   954, -625, 2871, -231],
+      white:   [ 210,  269,  -292,   99,  null,null,null,  1492, -445,   29,  -12,  215, -436, -242, -274, -328,-1181,  -164,  -65,  139,   73, -469,  194, -455, -461, -203,  538,   309, -487, 1419,-5642],
+      black:   [ 177,   18,   -16,   73,  null,null,null,  -706,  -60,   -2,    7,    6, -101,  -43,   56,   19,  407,    63,   48,  114,   47,  -76,  104, -119,  -59,  -45,  205,   153,  -74,  392, -655],
+      hispanic:[1607,  452,    -7, -164,  null,null,null,  2030, -583,  -54, -108,  188, -349, -319, -212, -269, 1330,  -218,  -57,  243,   36, -352,  328, -275, -323, -187,  362,   291,  194, 1277,  403],
+      male:    [ 727,  423,  -128, -183,  null,null,null,  1780, -170,  -12,  -24,  101, -437, -277, -227, -110, -116,    41,   29,  173,  157, -403,  296, -412, -403, -223, 1359,   869, -633, 1470,-1540],
+      female:  [ 388,   46,  -171,  491,  null,null,null,  2008, -363,    3,  -28,  184, -257, -172, -125, -342, 1626,    98,  -27,  354,  108, -428,  192, -389, -408, -252, -386,    84,    9, 1400, 1309],
+    };
+
+    // Years where CPS adopted a new Census population base
+    const CENSUS_SWITCH_YEARS = ['2003', '2012', '2022', '2026'];
+
+    // ── Chart setup ─────────────────────────────────────────────────────────
+    const PALETTE = {
+      total:    '#1d4ed8',
+      white:    '#0891b2',
+      black:    '#16a34a',
+      hispanic: '#ea580c',
+      male:     '#7c3aed',
+      female:   '#db2777',
+    };
+
+    function ds(key, label) {
+      return {
+        label,
+        data: S[key],
+        borderColor: PALETTE[key],
+        backgroundColor: PALETTE[key],
+        borderWidth: 2,
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        tension: 0,
+        fill: false,
+        spanGaps: false,
+      };
+    }
+
+    const VIEWS = {
+      total:  {
+        title: 'Total Population Adjustment',
+        datasets: [ds('total', 'Total')],
+      },
+      race:   {
+        title: 'Population Adjustment by Race / Ethnicity',
+        datasets: [ds('white', 'White'), ds('black', 'Black'), ds('hispanic', 'Hispanic')],
+      },
+      gender: {
+        title: 'Population Adjustment by Sex',
+        datasets: [ds('male', 'Male'), ds('female', 'Female')],
+      },
+    };
+
+    function buildAnnotations() {
+      const ann = {};
+      CENSUS_SWITCH_YEARS.forEach((yr, i) => {
+        ann[`cs${i}`] = {
+          type: 'line',
+          xMin: yr,
+          xMax: yr,
+          borderColor: 'rgba(220, 38, 38, 0.8)',
+          borderWidth: 2,
+          borderDash: [6, 4],
+          label: {
+            display: true,
+            content: 'New Census base',
+            rotation: -90,
+            position: 'end',
+            color: 'rgba(185, 28, 28, 0.9)',
+            font: { size: 10, weight: 'normal' },
+            backgroundColor: 'rgba(255, 255, 255, 0.82)',
+            padding: { x: 4, y: 3 },
+          },
+        };
+      });
+      return ann;
+    }
+
+    Chart.register(ChartAnnotation);
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: { labels: YEARS, datasets: VIEWS.total.datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        scales: {
+          x: {
+            ticks: { maxRotation: 45, autoSkip: true, maxTicksLimit: 18 },
+            grid: { color: 'rgba(0,0,0,0.05)' },
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Thousands of persons',
+              color: '#64748b',
+              font: { size: 12 },
+            },
+            grid: { color: 'rgba(0,0,0,0.05)' },
+          },
+        },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { boxWidth: 12, padding: 16, font: { size: 12 } },
+          },
+          tooltip: {
+            callbacks: {
+              label(ctx) {
+                const v = ctx.parsed.y;
+                if (v === null || v === undefined) return null;
+                return `${ctx.dataset.label}: ${v >= 0 ? '+' : ''}${v.toLocaleString()}K`;
+              },
+            },
+          },
+          annotation: { annotations: buildAnnotations() },
+        },
+      },
+    });
+
+    // ── Toggle ───────────────────────────────────────────────────────────────
+    function setView(view) {
+      document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+      document.getElementById(`btn-${view}`).classList.add('active');
+      document.getElementById('chartTitle').textContent = VIEWS[view].title;
+      chart.data.datasets = VIEWS[view].datasets;
+      chart.update();
+    }
+  </script>
+</body>
+</html>
