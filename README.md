@@ -17,25 +17,11 @@ Red dashed lines in the charts mark years when the CPS adopted a new Census-base
 estimate series: **2003, 2012, 2022, and 2026**.
 
 > **Note on sex breakdowns:** The Male and Female figures for 1999 and 2003–2011 reflect
-> persons aged 20 and older only, as that was the only breakdown published for those years.
+> persons aged 20 and older only, all other years reflect persons aged 16 and older.
 
 ## Example: Total adjustment
 
 ![Total CPS Population Control Adjustment](plots/total.png)
 
-## Files
 
-| Path | Description |
-|------|-------------|
-| `data/popcontrols_cps1996_2026.csv` | Source data |
-| `generate_plots.R` | R script (ggplot2) that produces all charts |
-| `plots/` | Generated SVG and PNG chart files |
-| `index.html` | GitHub Pages site with toggle between chart views |
-
-## Viewing the site
-
-The site is hosted via GitHub Pages. To regenerate the charts after updating the CSV, run:
-
-```r
-Rscript generate_plots.R
-```
+The site is hosted via GitHub Pages.
