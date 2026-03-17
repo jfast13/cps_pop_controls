@@ -8,16 +8,26 @@ A GitHub Pages static site visualizing historical CPS (Current Population Survey
 
 ## Structure
 
-- `index.html` — the entire site: Chart.js line charts with a toggle between Total / By Race / By Gender views
-- `data/popcontrols_cps1996_2026.csv` — source CSV (data is embedded directly in `index.html` for simplicity)
+- `generate_plots.R` — reads the CSV and writes all SVG + PNG chart files to `plots/` using ggplot2
+- `plots/` — generated chart files (SVG used by the site, PNG used by README); **committed to the repo**
+- `index.html` — GitHub Pages site; displays pre-generated SVGs with a JS toggle (no build step at serve time)
+- `data/popcontrols_cps1996_2026.csv` — source data, manually collected
+
+## Regenerating charts
+
+```r
+Rscript generate_plots.R
+```
+
+Requires R packages: `ggplot2`, `dplyr`, `tidyr`, `readr`, `svglite`.
 
 ## Key details
 
-- **Missing years**: 2000–2002 have no published data; stored as `null` in the JS arrays so Chart.js renders a line gap
-- **Census-switch years** (red dashed vertical lines): 2003, 2012, 2022, 2026 — controlled by the `CENSUS_SWITCH_YEARS` array in `index.html`
-- **Sex breakdown caveat**: Male/Female values for 1999 and 2003–2011 cover persons aged 20+ only (noted in the About section)
-- Dependencies loaded via CDN: Chart.js 4.4.0, chartjs-plugin-annotation 3.0.1
+- **Missing years**: 2000–2002 have no published data; `df` simply has no rows for those years, causing a natural gap in ggplot2 line charts
+- **Census-switch years** (red dashed vertical lines): 2003, 2012, 2022, 2026 — controlled by `CENSUS_YEARS` in `generate_plots.R`
+- **Sex breakdown caveat**: Male/Female values for 1999 and 2003–2011 cover persons aged 20+ only
+- Chart views: Total, By Race/Ethnicity, By Sex, White, Black, Hispanic, Male, Female
 
 ## GitHub Pages deployment
 
-Enable under Settings → Pages → Source: `main` branch, `/ (root)`. The site will be served from `index.html` at the repo root.
+Enable under Settings → Pages → Source: `main` branch, `/ (root)`. The site is served from `index.html`; the `plots/` folder must be committed for the images to load.
